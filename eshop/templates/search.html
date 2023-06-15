@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block description %}
+    We have verity of collection. Count on us...
+{% endblock %}
+{% block title %}
+Search ...
+{% endblock %}
+{% block content %}
+<div>
+    <p class="text-center my_search_text>">you have searched for: <b>"{{query}}"</b></p>
+</div>
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-lg-4">
+            <div class="card text-center" style="min-width:18rem min-height:20rem;">
+                <a href="{{product.get_url}}"><img class="card-img-top" alt="{{product.name}}" src="{{product.image.url}}" style="width:100%px; height:300px"></a>
+
+             <div class="card-body text-sie:14px text-transform:uppercase">
+                    <h4>{{product.name}}</h4>
+                    <p>{{product.price}}</p>
+             </div>
+            </div><br>
+
+        </div>
+        {% empty %}
+            <div>
+                <p class="text-center my_search_text" style="color:red"> Sorry! No results found</p>
+            </div>
+        {% endfor %}
+    </div>
+    <br>
+</div>
+{% endblock %}

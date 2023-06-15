@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block description %}
+        {{product.description|truncatewords:155}}
+{% endblock %}
+
+{% block title %}
+
+        {{product.name}} -- VTS eshop
+
+{% endblock %}
+{% block content %}
+<div class="row my_pro_row">
+    <div class="mx_auto">
+        <p><a href="{% url 'shop_app:allProdCat' %}">Home</a> | <a href="{{product.category.get_url}}">{{product.category}}</a> | {{product.name}}</p>
+    </div>
+</div>
+<div class="container">
+<br>
+<div class="row">
+    <div class="col-6 col-md-6 col-sm-6 col-lg-6 text-center">
+        <div style="min-width: 18rem,">
+            <img src="{{product.image.url}}" alt="{{product.name}}" style="width:100%;">
+            <br>
+        </div>
+    </div>
+
+    <div class="col-6 col-md-6 col-sm-6 col-lg-6 ">
+        <div>
+           <h1 class="prod_name">{{product.name}}</h1>
+            <u><b><p>Product Description</p></b></u>
+            <p class="text-justify">{{product.description}}</p>
+            {% if product.stock <= 0 %}
+            <p style="color:red"><b>Out of Stock</b></p>
+            {% else %}
+            <a class="btn btn-secondary" style="--bs-btn-padding-x: 1.5rem" href="{% url 'cart_app:add_cart' product.id%}"><i class="fa-sharp fa-light fa-cart-shopping-fast">Add to Cart <i class="fa-solid fa-cart-shopping"></i></i></a>
+
+            <a class="btn btn-primary" style="--bs-btn-padding-x: 1.5rem">Buy Now <i class="fa-solid fa-basket-shopping"></i></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
